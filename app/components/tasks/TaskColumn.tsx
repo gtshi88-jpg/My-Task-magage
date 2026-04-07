@@ -56,7 +56,7 @@ export function TaskColumn({
   return (
     <section
       className={[
-        "flex w-[min(100%,300px)] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/35 shadow-2xl shadow-black/25 ring-1 ring-white/20",
+        "flex w-[min(100%,420px)] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/35 shadow-2xl shadow-black/25 ring-1 ring-white/20",
         columnBody[status],
         isOver ? "ring-2 ring-sky-300/70 ring-offset-2 ring-offset-transparent" : "",
       ].join(" ")}

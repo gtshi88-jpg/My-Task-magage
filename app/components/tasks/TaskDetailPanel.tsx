@@ -68,7 +68,7 @@ function TaskDetailForm({
 
   return (
     <aside
-      className="fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col border-l border-zinc-200/80 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-md"
+      className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[min(92vw,760px)] flex-col border-l border-zinc-200/80 bg-white/95 shadow-2xl shadow-slate-900/10 backdrop-blur-md lg:max-w-[50vw]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="task-detail-title"
@@ -220,16 +220,17 @@ function TaskDetailForm({
                       }
                       className="mt-1 h-4 w-4 shrink-0 rounded border-zinc-300 text-sky-600 focus:ring-sky-500"
                     />
-                    <input
+                    <textarea
                       key={`${c.id}-${c.title}`}
                       defaultValue={c.title}
+                      rows={2}
                       onBlur={(e) => {
                         const v = e.target.value.trim();
                         if (v && v !== c.title) {
                           void updateTask(c.id, { title: v });
                         }
                       }}
-                      className="min-w-0 flex-1 rounded border border-transparent bg-transparent px-1 py-0.5 text-sm text-zinc-900 outline-none focus:border-zinc-200"
+                      className="min-w-0 flex-1 resize-y rounded border border-transparent bg-transparent px-1 py-0.5 text-sm leading-snug text-zinc-900 outline-none focus:border-zinc-200"
                     />
                     <button
                       type="button"

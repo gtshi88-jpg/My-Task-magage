@@ -45,26 +45,17 @@ function OverlayCard({ task, tasks }: { task: Task; tasks: Task[] }) {
       : "依頼元・依頼先 未設定";
   const subs = tasksByParentId(tasks, task.id);
   const doneCount = subs.filter((c) => c.status === "done").length;
+  const titleShort = Array.from(task.title).length <= 20;
   return (
-    <div className="w-[280px] rounded-2xl border border-white/60 bg-white/95 p-3.5 shadow-2xl ring-2 ring-sky-400/30 backdrop-blur-sm">
-      <div className="flex items-start justify-between gap-2">
-        <p className="min-w-0 font-semibold leading-snug text-zinc-900">
-          {task.title}
-        </p>
-        <div className="flex shrink-0 gap-1">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-600 text-[10px] font-bold text-white">
-            {task.senderName.trim()
-              ? initialsFromName(task.senderName)
-              : "—"}
-          </span>
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-600 text-[10px] font-bold text-white">
-            {task.receiverName.trim()
-              ? initialsFromName(task.receiverName)
-              : "—"}
-          </span>
-        </div>
-      </div>
-      <p className="mt-2 line-clamp-2 text-xs text-zinc-600">{requestLine}</p>
+    <div className="w-[min(100vw-2rem,420px)] min-w-[300px] rounded-2xl border border-white/60 bg-white/95 p-3.5 shadow-2xl ring-2 ring-sky-400/30 backdrop-blur-sm">
+      <p
+        className={[
+          "font-semibold leading-snug text-zinc-900",
+          titleShort ? "break-words" : "line-clamp-2 min-w-0 break-words",
+        ].join(" ")}
+      >
+        {task.title}
+      </p>
       {isTaskOverdue(task) ? (
         <p className="mt-1 text-[10px] font-bold text-red-700">期限切れ</p>
       ) : null}
@@ -90,6 +81,24 @@ function OverlayCard({ task, tasks }: { task: Task; tasks: Task[] }) {
             改修 {doneCount}/{subs.length}
           </span>
         ) : null}
+      </div>
+      <div className="mt-2 flex items-center justify-between gap-2 border-t border-zinc-200/80 pt-2">
+        <p className="min-w-0 flex-1 text-xs text-zinc-600">{requestLine}</p>
+        <div className="flex shrink-0 gap-0.5">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-600 text-[10px] font-bold text-white">
+            {task.senderName.trim()
+              ? initialsFromName(task.senderName)
+              : "—"}
+          </span>
+          <span className="text-[10px] text-zinc-400" aria-hidden>
+            →
+          </span>
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-600 text-[10px] font-bold text-white">
+            {task.receiverName.trim()
+              ? initialsFromName(task.receiverName)
+              : "—"}
+          </span>
+        </div>
       </div>
     </div>
   );

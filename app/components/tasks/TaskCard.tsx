@@ -220,16 +220,16 @@ export function TaskCard({
           onClick={() => onOpen(task)}
           className="min-w-0 flex-1 rounded-lg text-left outline-none ring-zinc-400 focus-visible:ring-2"
         >
-          <div className="flex items-start justify-between gap-2">
-            <span className="line-clamp-2 font-semibold leading-snug text-zinc-900">
-              {task.title}
-            </span>
-            <RoleAvatars
-              senderName={task.senderName}
-              receiverName={task.receiverName}
-            />
-          </div>
-          <p className="mt-2 line-clamp-2 text-xs text-zinc-600">{requestLine}</p>
+          <span
+            className={[
+              "block font-semibold leading-snug text-zinc-900",
+              Array.from(task.title).length <= 20
+                ? "break-words"
+                : "line-clamp-2 min-w-0 break-words",
+            ].join(" ")}
+          >
+            {task.title}
+          </span>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <DueDatePill task={task} />
             <span
@@ -258,6 +258,15 @@ export function TaskCard({
               </span>
             ) : null}
           </div>
+          <div className="mt-2 flex items-center justify-between gap-2 border-t border-zinc-100 pt-2">
+            <p className="min-w-0 flex-1 text-xs leading-snug text-zinc-600">
+              {requestLine}
+            </p>
+            <RoleAvatars
+              senderName={task.senderName}
+              receiverName={task.receiverName}
+            />
+          </div>
         </button>
       </div>
 
@@ -281,7 +290,7 @@ export function TaskCard({
                 />
                 <span
                   className={[
-                    "min-w-0 flex-1 text-xs leading-snug text-zinc-800",
+                    "min-w-0 flex-1 break-words text-xs leading-snug text-zinc-800",
                     c.status === "done" ? "text-zinc-400 line-through" : "",
                   ].join(" ")}
                 >
