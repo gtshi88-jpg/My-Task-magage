@@ -275,8 +275,8 @@ export function KanbanView({
                   onDragStart={handleDragStart}
                   onDragEnd={handleDragEnd}
                 >
-                  <div className="flex min-h-[min(60vh,640px)] flex-1 justify-center overflow-x-auto overflow-y-hidden px-3 py-3 sm:min-h-[min(65vh,680px)] sm:px-4 sm:py-4 md:px-5">
-                    <div className="flex w-max max-w-full shrink-0 justify-center gap-3 sm:gap-4">
+                  <div className="flex min-h-[min(60vh,640px)] flex-1 justify-start overflow-x-auto overflow-y-hidden px-3 py-3 touch-pan-x sm:min-h-[min(65vh,680px)] sm:px-4 sm:py-4 md:px-5">
+                    <div className="flex w-max min-w-full shrink-0 justify-start gap-3 sm:gap-4">
                     {STATUS_ORDER.map((status) => (
                       <TaskColumn
                         key={status}

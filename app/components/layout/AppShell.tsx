@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { ReactNode } from "react";
 import { LiveClock } from "@/app/components/layout/LiveClock";
 import { APP_BG_IMAGE_STYLE } from "@/lib/ui/liquid-glass";
@@ -66,13 +67,65 @@ export function AppShell({
   errorBanner,
   guestBanner,
 }: AppShellProps) {
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const handleNavSelect = (view: AppMainView) => {
+    onMainViewChange(view);
+    setMobileNavOpen(false);
+  };
+
   return (
     <div className="relative flex min-h-dvh w-full flex-1 overflow-hidden bg-[linear-gradient(160deg,#0f172a_0%,#1e293b_45%,#172554_100%)]">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_60%_at_50%_-30%,rgba(56,189,248,0.12),transparent)]"
         aria-hidden
       />
-      <aside className="relative z-10 flex w-[4.25rem] shrink-0 flex-col items-center border-r border-white/10 bg-slate-950/55 py-4 backdrop-blur-xl">
+      {mobileNavOpen ? (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-30 bg-slate-950/45 backdrop-blur-sm md:hidden"
+            aria-label="メニューを閉じる"
+            onClick={() => setMobileNavOpen(false)}
+          />
+          <aside className="fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-white/10 bg-slate-950/90 p-4 backdrop-blur-xl md:hidden">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 text-sm font-bold text-white shadow-lg shadow-indigo-950/50 ring-1 ring-white/25">
+                T
+              </div>
+              <p className="text-sm font-semibold text-white/90">メニュー</p>
+            </div>
+            <div className="space-y-2">
+              <button
+                type="button"
+                onClick={() => handleNavSelect("planner")}
+                className={[
+                  "w-full rounded-xl px-3 py-2 text-left text-sm transition",
+                  mainView === "planner"
+                    ? "bg-white/20 text-white ring-1 ring-white/25"
+                    : "text-slate-200 hover:bg-white/10 hover:text-white",
+                ].join(" ")}
+              >
+                プランナー
+              </button>
+              <button
+                type="button"
+                onClick={() => handleNavSelect("list")}
+                className={[
+                  "w-full rounded-xl px-3 py-2 text-left text-sm transition",
+                  mainView === "list"
+                    ? "bg-white/20 text-white ring-1 ring-white/25"
+                    : "text-slate-200 hover:bg-white/10 hover:text-white",
+                ].join(" ")}
+              >
+                一覧
+              </button>
+            </div>
+          </aside>
+        </>
+      ) : null}
+
+      <aside className="relative z-10 hidden w-[4.25rem] shrink-0 flex-col items-center border-r border-white/10 bg-slate-950/55 py-4 backdrop-blur-xl md:flex">
         <div className="mb-6 flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-indigo-600 text-sm font-bold text-white shadow-lg shadow-indigo-950/50 ring-1 ring-white/25">
           T
         </div>
@@ -134,7 +187,7 @@ export function AppShell({
         </div>
       </aside>
 
-      <div className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col p-3 pl-0 sm:p-4 sm:pl-0">
+      <div className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col p-3 sm:p-4 md:pl-0">
         <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(15,23,42,0.65)] ring-1 ring-white/15">
           {/* リキッドグラス: パネル全面にビル背景＋ダークティント（ヘッダー〜列まで連続） */}
           <div
@@ -166,6 +219,24 @@ export function AppShell({
 
           <header className="shrink-0 border-b border-white/15 bg-white/10 px-3 py-3 backdrop-blur-xl backdrop-saturate-150 sm:px-4 sm:py-3.5">
             <div className="mx-auto flex w-full max-w-[1600px] flex-wrap items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white/85 backdrop-blur-sm hover:bg-white/20 md:hidden"
+              aria-label="メニューを開く"
+              onClick={() => setMobileNavOpen(true)}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              >
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
             <div className="min-w-0">
               <h1 className="text-lg font-semibold tracking-tight text-white drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
                 タスク
