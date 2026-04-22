@@ -237,7 +237,7 @@ export function AppShell({
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1 basis-[12rem] sm:basis-auto">
               <h1 className="text-lg font-semibold tracking-tight text-white drop-shadow-[0_1px_12px_rgba(0,0,0,0.35)]">
                 タスク
               </h1>
@@ -246,7 +246,7 @@ export function AppShell({
               </p>
             </div>
 
-            <div className="relative min-w-0 flex-1 basis-[min(100%,14rem)] sm:max-w-md">
+            <div className="order-3 relative min-w-0 basis-full sm:order-none sm:flex-1 sm:basis-[min(100%,14rem)] sm:max-w-md">
               <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-white/45">
                 <svg
                   width="16"
@@ -269,8 +269,8 @@ export function AppShell({
               />
             </div>
 
-            <div className="ml-auto flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
-              <LiveClock className="text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]" />
+            <div className="order-4 flex w-full flex-wrap items-center justify-end gap-2 sm:order-none sm:ml-auto sm:w-auto sm:gap-3 md:gap-4">
+              <LiveClock className="text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)] max-[420px]:hidden" />
               <button
                 type="button"
                 className="hidden rounded-xl border border-white/20 bg-white/10 p-2 text-white/70 transition hover:bg-white/18 hover:text-white md:inline-flex"

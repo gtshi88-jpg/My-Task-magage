@@ -56,7 +56,7 @@ export function TaskColumn({
   return (
     <section
       className={[
-        "flex w-[min(100%,420px)] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/35 shadow-2xl shadow-black/25 ring-1 ring-white/20",
+        "flex min-h-0 w-[min(85vw,420px)] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/35 shadow-2xl shadow-black/25 ring-1 ring-white/20 sm:w-[min(70vw,420px)] md:min-w-0 md:w-full md:shrink",
         columnBody[status],
         isOver ? "ring-2 ring-sky-300/70 ring-offset-2 ring-offset-transparent" : "",
       ].join(" ")}
@@ -86,7 +86,7 @@ export function TaskColumn({
 
       <div
         ref={setNodeRef}
-        className="flex min-h-[140px] flex-1 flex-col gap-2.5 p-2.5"
+        className="flex min-h-[140px] flex-1 flex-col gap-2.5 overflow-y-auto p-2.5"
       >
         {columnTasks.length === 0 ? (
           <p className="py-8 text-center text-xs text-white/45">

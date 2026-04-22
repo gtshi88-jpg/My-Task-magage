@@ -112,7 +112,7 @@ function TaskDetailForm({
         </label>
 
         <div className="mt-5 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <label className="block">
               <span className="mb-1 block text-xs font-medium text-zinc-500">
                 依頼元

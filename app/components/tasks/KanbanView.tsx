@@ -275,20 +275,20 @@ export function KanbanView({
                   onDragStart={handleDragStart}
                   onDragEnd={handleDragEnd}
                 >
-                  <div className="flex min-h-[min(60vh,640px)] flex-1 justify-start overflow-x-auto overflow-y-hidden px-3 py-3 touch-pan-x sm:min-h-[min(65vh,680px)] sm:px-4 sm:py-4 md:px-5">
-                    <div className="flex w-max min-w-full shrink-0 justify-start gap-3 sm:gap-4">
-                    {STATUS_ORDER.map((status) => (
-                      <TaskColumn
-                        key={status}
-                        status={status}
-                        tasks={displayTasks}
-                        onOpenTask={openDetail}
-                        onAddTask={(s) => void addTask({ status: s })}
-                        addTask={addTask}
-                        updateTask={updateTask}
-                        deleteTask={deleteTask}
-                      />
-                    ))}
+                  <div className="min-h-[min(60vh,640px)] flex-1 overflow-x-auto overflow-y-hidden px-3 py-3 touch-pan-x sm:min-h-[min(65vh,680px)] sm:px-4 sm:py-4 md:overflow-hidden md:px-5">
+                    <div className="flex h-full min-h-0 min-w-max gap-2 sm:gap-3 md:grid md:min-w-0 md:w-full md:grid-cols-3 md:gap-4">
+                      {STATUS_ORDER.map((status) => (
+                        <TaskColumn
+                          key={status}
+                          status={status}
+                          tasks={displayTasks}
+                          onOpenTask={openDetail}
+                          onAddTask={(s) => void addTask({ status: s })}
+                          addTask={addTask}
+                          updateTask={updateTask}
+                          deleteTask={deleteTask}
+                        />
+                      ))}
                     </div>
                   </div>
 
